@@ -19,7 +19,7 @@ public class CustomizedExceptionHandler {
     public ResponseEntity<ExceptionResponse> handleRunTimeException(RuntimeException e) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(e.getMessage(), HttpStatus.BAD_REQUEST.value(),new Date());
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
-    }/*
+    }*/
 
     @ExceptionHandler(NotFoundException.class) //TODO: resolver erro de dependencia de modulos
     public ResponseEntity<ExceptionResponse> handleNotFoundException(NotFoundException e) {
