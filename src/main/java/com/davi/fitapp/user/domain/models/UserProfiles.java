@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserProfile {
+public class UserProfiles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -2,12 +2,13 @@ package com.davi.fitapp.user.domain.models;
 
 import com.davi.fitapp.user.domain.enums.Gender;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UuidGenerator;
+import org.hibernate.type.SqlTypes;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -16,7 +17,12 @@ import java.util.Date;
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
     private Long id;
+
+    @JdbcTypeCode(SqlTypes.BINARY)
+    @Column(columnDefinition = "BINARY(16)", nullable = false, updatable = false, unique = true)
+    private UUID uuid;
 
     private String name;
 
@@ -40,5 +46,13 @@ public class Users {
         this.age = age;
         this.height = height;
         this.gender = gender;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = UUID.fromString(uuid);
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 }

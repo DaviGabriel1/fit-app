@@ -8,7 +8,7 @@ public class UserMapper {
 
     public static UserResponse toDto(Users users) {
         return new UserResponse(
-                users.getId(),
+                users.getUuid().toString(),
                 users.getName(),
                 users.getEmail(),
                 users.getAge(),

@@ -11,19 +11,20 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
-    public UserResponse findUserById(Long id) {
-        Optional<Users> userOptional = this.userRepository.findById(id);
+    public UserResponse findUserByUuid(UUID uuid) {
+        Optional<Users> userOptional = this.userRepository.findUsersByUuid(uuid);
         if(userOptional.isEmpty()) throw new UserNotFoundException("usuário não encontrado");
         return UserMapper.toDto(userOptional.get());
     }
@@ -36,21 +37,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse createUser(UserRequest user) {
         Users users = UserMapper.toEntity(user);
+        users.setUuid(UUID.randomUUID());
         Users userSaved = this.userRepository.save(users);
         return UserMapper.toDto(userSaved);
     }
 
     @Override
-    public UserResponse updateUser(Long id, UserRequest user) {
+    public UserResponse updateUser(UUID uuid, UserRequest user) {
         Users users = UserMapper.toEntity(user);
-        users.setId(id);
+        users.setUuid(uuid);
         Users updatedUser = this.userRepository.save(users);
         return UserMapper.toDto(updatedUser);
     }
 
     @Override
-    public void deleteUserById(Long id) {
-        Optional<Users> user = this.userRepository.findById(id);
+    public void deleteUserByUuid(UUID uuid) {
+        Optional<Users> user = this.userRepository.findUsersByUuid(uuid);
         if(user.isEmpty()) throw new UserNotFoundException("usuário não encontrado");
         this.userRepository.delete(user.get());
     }
