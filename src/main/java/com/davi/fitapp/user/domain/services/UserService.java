@@ -1,5 +1,7 @@
 package com.davi.fitapp.user.domain.services;
 
+import com.davi.fitapp.user.domain.dtos.UserProfilesRequest;
+import com.davi.fitapp.user.domain.dtos.UserProfilesResponse;
 import com.davi.fitapp.user.domain.dtos.UserRequest;
 import com.davi.fitapp.user.domain.dtos.UserResponse;
 
@@ -12,5 +14,8 @@ public interface UserService {
     UserResponse createUser(UserRequest user);
     UserResponse updateUser(UUID uuid, UserRequest user);
     void deleteUserByUuid(UUID uuid);
+    //profile
+    UserProfilesResponse saveUserProfile(UUID userUuid, UserProfilesRequest userProfilesRequest);
+    UserProfilesResponse updateUserProfile(UUID userUuid, UserProfilesRequest userProfilesRequest);
 
 }

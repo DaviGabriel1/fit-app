@@ -2,16 +2,14 @@ package com.davi.fitapp.user.domain.models;
 
 import com.davi.fitapp.user.domain.enums.ActivityLevel;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class UserProfiles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,5 +23,6 @@ public class UserProfiles {
 
     private double goalWeight;
 
+    @Enumerated(value = EnumType.STRING)
     private ActivityLevel activityLevel;
 }
