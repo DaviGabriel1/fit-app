@@ -88,4 +88,15 @@ public class UserServiceImpl implements UserService {
         UserProfiles userProfilesSaved = this.userProfilesRepository.save(userProfiles);
         return UserProfilesMapper.toDto(userProfilesSaved);
     }
+
+    @Override
+    public UserProfilesResponse findUserProfile(UUID userUuid) {
+        Users user = this.userRepository.findUsersByUuid(userUuid)
+                .orElseThrow(() -> new UserNotFoundException("usuário não encontrado"));
+        UserProfiles userProfiles = this.userProfilesRepository.findUserProfilesByUserId(user)
+                .orElseThrow(() -> new UserNotFoundException("perfil de usuário não encontrado"));
+        return UserProfilesMapper.toDto(userProfiles);
+    }
+
+
 }

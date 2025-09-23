@@ -17,5 +17,5 @@ public interface UserService {
     //profile
     UserProfilesResponse saveUserProfile(UUID userUuid, UserProfilesRequest userProfilesRequest);
     UserProfilesResponse updateUserProfile(UUID userUuid, UserProfilesRequest userProfilesRequest);
-
+    UserProfilesResponse findUserProfile(UUID userUuid);
 }

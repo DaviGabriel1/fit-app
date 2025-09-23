@@ -48,6 +48,12 @@ public class UserController {
 
     // profiles
 
+    @GetMapping("{userUuid}/profile")
+    public ResponseEntity<UserProfilesResponse> findUserProfile(@PathVariable UUID userUuid) {
+        UserProfilesResponse userProfilesResponse = this.userService.findUserProfile(userUuid);
+        return ResponseEntity.ok(userProfilesResponse);
+    }
+
     @PostMapping("{userUuid}/profile")
     public ResponseEntity<UserProfilesResponse> saveUserProfile(@PathVariable UUID userUuid,@RequestBody @Valid UserProfilesRequest userProfilesRequest) {
         UserProfilesResponse userProfilesResponse = this.userService.saveUserProfile(userUuid, userProfilesRequest);
